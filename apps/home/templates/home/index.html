@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3 class="d-flex align-items-center">Hola {{ user.username }} :-)!  
+           
+            {% if user.vendedor.avatar.url %}
+            <img class="img-fluid rounded-circle" src="{{ user.vendedor.avatar.url }}" alt="Avatar" style="height: 35px;" /> 
+            {% else %}
+            <img class="img-fluid rounded-circle"  src="{% static 'venta/avatares.png' %}" alt="avatar" style="height: 35px;" />
+            {% endif %}  
+        </h3>
+    {% endif %}
+    {% if messages %}{{ messages }}{% endif %}
+    {% if user.is_staff %}
+        <div class="row">
+            <a href="{% url 'admin:index' %}" class="btn btn-outline-dark">Configurar sitio</a>
+        </div>
+        <div class="row">
+            <a href="{% url 'home:register' %}" class="btn btn-outline-dark">Registrar nuevo usuario</a>
+        </div>
+    {% endif %}
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'home/img/360_F_385679495_su4sHZoheo12flSRcPBBoMuZrDAgZ08H.jpg' %}" alt="Presentación" />
+        </div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">Bienvenid@ a Bukin! :-)</h1>
+            <p>
+                <div class>Bukin es una plataforma para quienes disfrutan la lectura y estan buscando conocer distintos libros y autores.</div>
+                <div class>Aquí publicaremos libros que hemos encontrado con un precio justo a la calidad del producto.</div>
+                Los libros disponibles se encuentran en la barra de navegación en Menú y debes tener tu sesión abierta para visualizarla.
+                <div class>En caso de querer adquirir y/o entregar un libro, envía un mail a hola@bukin.cl con el asunto PEDIDO + El nombre del libro que deseas obtener/ofrecer.</div>
+                Esperamos que lo pases muy bien aquí!
+            </p>
+        </div>
+    </div>
+{% endblock content %}
